@@ -4,7 +4,7 @@ import { rowSet} from './rules'
 
 
 const App: React.SFC = () => {
-  return <div />;
+  return <span>Andrzej</span>;
 };
 
 export default App;
