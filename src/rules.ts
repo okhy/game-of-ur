@@ -5,12 +5,7 @@ const midLane: number[] = [9, 10, 11, 12, 13, 14, 15, 16];
 const dice: number[] = [0, 0, 1, 1];
 export const dices: number[][] = [dice, dice, dice, dice];
 
-type pieceType = {
-  id: number;
-  position: number | null;
-};
-
-export const players: playerType[] = [
+export const playerSet: playerType[] = [
   {
     id: 1,
     pieceType: "black",
