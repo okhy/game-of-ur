@@ -5,3 +5,5 @@ export enum pieceType {
 }
 
 export type tileType = { pieces: string[], accepts: pieceType[], id: number, isRosette?: boolean }
+
+export type rowSetType = tileType[][]
