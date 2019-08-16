@@ -44,7 +44,7 @@ describe("Game state Tests", () => {
       it('changeTurn function', () => {
         const testPlayerID = changeTurn(mockPlayerSet[0].id, mockPlayerSet)
 
-        expect(testPlayerID).toEqual(mockPlayerSet)
+        expect(testPlayerID).toEqual(mockPlayerSet[1].id)
       })
     })
   })
