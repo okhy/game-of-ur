@@ -24,10 +24,10 @@ export const changeTurn = (
     player => player.id === currentPlayerID
   );
 
-  if (currentPlayerIndex >= players.length - 1) {
+  if (currentPlayerIndex + 1 >= players.length) {
     return players[0].id;
   }
-  return players[currentPlayerIndex].id;
+  return players[currentPlayerIndex + 1 ].id;
 };
 
 type initialGameStateType = {

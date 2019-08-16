@@ -1,5 +1,5 @@
 import { mockRowSet, mockPlayerSet, mockDiceSet } from './../__mocks__/configMocks'
-import { createGameState } from './context'
+import { createGameState, changeTurn } from './context'
 
 const mockConfig = { board: mockRowSet, players: mockPlayerSet, dices: mockDiceSet }
 
@@ -29,7 +29,6 @@ describe("Game state Tests", () => {
       expect(testObj.changeTurn).toBeTruthy()
       expect(testObj.throwDice).toBeTruthy()
       expect(testObj.movePiece).toBeTruthy()
-
     })
     it("... changes players turn", () => {
       const testObj = createGameState(mockConfig)
@@ -42,9 +41,11 @@ describe("Game state Tests", () => {
     it.todo("... moves piece");
 
     describe('Throw dice helper function ...', () => {
-      it.todo('... ', () => {
+      it('changeTurn function', () => {
+        const testPlayerID = changeTurn(mockPlayerSet[0].id, mockPlayerSet)
 
+        expect(testPlayerID).toEqual(mockPlayerSet)
       })
-    }
+    })
   })
 });

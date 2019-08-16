@@ -17,7 +17,7 @@ describe("Board component ...", () => {
   });
 
   it("... renders tiles according to config", () => {
-    const wrapper = shallow(<Board config={mockRowSet} />);
+    const wrapper = shallow(<Board tileSet={mockRowSet} />);
 
     expect(wrapper.find(".row")).toHaveLength(1);
     expect(wrapper.find(".tile")).toHaveLength(1);
