@@ -1,9 +1,14 @@
+export type playerType = {
+  id: number;
+  pieceType: string;
+  playerPath: number[];
+  pieceCount: number;
+};
 
-export enum pieceType {
-  first = 'black',
-  second = 'white'
-}
+export type tileType = {
+  id: number;
+  isRosette?: boolean;
+  isOccupied?: boolean;
+};
 
-export type tileType = { pieces: string[], accepts: pieceType[], id: number, isRosette?: boolean }
-
-export type rowSetType = tileType[][]
+export type rowSetType = tileType[][];
