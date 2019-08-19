@@ -37,8 +37,19 @@ describe("Game state Tests", () => {
 
       expect(testObj.currentPlayerID).toEqual(mockPlayerSet[1].id);
     });
-    it.todo("... throws dice");
-    it.todo("... moves piece");
+    it("... throws dice", () => {
+      const testObj = createGameState(mockConfig);
+
+      testObj.throwDice()
+
+      expect(testObj.diceResult).not.toEqual(0)
+    });
+    it.todo("... moves piece", () => {
+      const testObj = createGameState(mockConfig);
+
+      testObj.movePiece(0)
+
+    });
 
     describe('Throw dice helper function ...', () => {
       it('changeTurn function', () => {

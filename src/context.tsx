@@ -11,7 +11,8 @@ export const throwDice = (diceSet: number[][]): number => {
 export const movePiece = (
   board: rowSetType,
   tileIndex: number,
-  moves: number
+  moves: number,
+  path: number[]
 ): rowSetType => {
   return board;
 };
@@ -27,7 +28,7 @@ export const changeTurn = (
   if (currentPlayerIndex + 1 >= players.length) {
     return players[0].id;
   }
-  return players[currentPlayerIndex + 1 ].id;
+  return players[currentPlayerIndex + 1].id;
 };
 
 type initialGameStateType = {
@@ -41,12 +42,12 @@ const initialGameState: initialGameStateType = {
   dices: dices
 };
 
-interface gameStateType extends initialGameStateType {
+export interface gameStateType extends initialGameStateType {
   diceResult: number;
   currentPlayerID: number;
   changeTurn(): void;
   throwDice(): void;
-  movePiece(tileStart: number): void;
+  movePiece(tileStart?: number): void;
 }
 
 export const createGameState = (
@@ -64,21 +65,29 @@ export const createGameState = (
     throwDice: function() {
       this.diceResult = throwDice(this.dices);
     },
-    movePiece: function(tileStart: number) {
-      this.board = movePiece(this.board, tileStart, this.diceResult);
+    movePiece: function(tileStart) {
+      const moves = tileStart
+        ? this.diceResult > 0
+          ? this.diceResult - 1
+          : 0
+        : 0;
+
+      this.board = movePiece(
+        this.board,
+        tileStart || this.players[this.currentPlayerID].playerPath[0],
+        moves,
+        this.players[this.currentPlayerID].playerPath
+      );
       this.changeTurn();
     }
   };
 };
-
 const gameState = createGameState(initialGameState);
 
-const GameContext: React.Context<gameStateType> = React.createContext(
-  createGameState(gameState)
-);
+export const GameContext: any = React.createContext(gameState);
 
-const ContextWrapper: React.SFC = ({ children }) => (
+const GameContextProviderWrapper: React.SFC = ({ children }) => (
   <GameContext.Provider value={gameState}>{children}</GameContext.Provider>
 );
 
-export default ContextWrapper;
+export default GameContextProviderWrapper;

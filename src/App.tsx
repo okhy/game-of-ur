@@ -1,9 +1,14 @@
 import React from "react";
-
-// import { rowSet} from './rules'
+import { GameContext, gameStateType } from "./context";
 
 const App: React.SFC = () => {
-  return <span>Andrzej</span>;
+  return (
+    <GameContext.Consumer>
+      {(gameState: gameStateType) => {
+        return <span>Andrzej {gameState.diceResult}</span>;
+      }}
+    </GameContext.Consumer>
+  );
 };
 
 export default App;
