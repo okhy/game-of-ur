@@ -1,5 +1,5 @@
 import { mockRowSet, mockPlayerSet, mockDiceSet } from './../__mocks__/configMocks'
-import { createGameState, changeTurn } from './context'
+import { createGameState } from './context'
 
 const mockConfig = { board: mockRowSet, players: mockPlayerSet, dices: mockDiceSet }
 
@@ -20,14 +20,15 @@ describe("Game state Tests", () => {
     it('... computes additional properties', () => {
       const testObj = createGameState(mockConfig)
 
-      expect(testObj.currentPlayerID).toEqual(1)
+      expect(testObj.currentPlayerIndex).toEqual(0)
       expect(testObj.diceResult).toEqual(0)
+      expect(testObj.diceRolled).toEqual(false)
     })
     it('... has appropriate methods', () => {
       const testObj = createGameState(mockConfig)
 
       expect(testObj.changeTurn).toBeTruthy()
-      expect(testObj.throwDice).toBeTruthy()
+      expect(testObj.rollDice).toBeTruthy()
       expect(testObj.movePiece).toBeTruthy()
     })
     it("... changes players turn", () => {
@@ -35,28 +36,37 @@ describe("Game state Tests", () => {
 
       testObj.changeTurn()
 
-      expect(testObj.currentPlayerID).toEqual(mockPlayerSet[1].id);
+      expect(testObj.currentPlayerIndex).toEqual(1);
     });
-    it("... throws dice", () => {
+    it("... rolls dice", () => {
       const testObj = createGameState(mockConfig);
 
-      testObj.throwDice()
+      testObj.rollDice()
 
-      expect(testObj.diceResult).not.toEqual(0)
+      expect(testObj.diceRolled).toEqual(true)
     });
-    it.todo("... moves piece", () => {
+    it("... puts piece on board", () => {
       const testObj = createGameState(mockConfig);
 
-      testObj.movePiece(0)
+      testObj.rollDice()
+      testObj.putPieceOnBoard()
 
+      const currentPlayer = testObj.players[testObj.currentPlayerIndex]
+      const firstPlayerPathTileCords = currentPlayer.playerPath[0]
+      const firstPlayerPathTileOnBoard = testObj.board[firstPlayerPathTileCords.y][firstPlayerPathTileCords.x].occupiedBy
+
+      expect(firstPlayerPathTileOnBoard).toEqual(currentPlayer.pieceKind)
     });
 
-    describe('Throw dice helper function ...', () => {
-      it('changeTurn function', () => {
-        const testPlayerID = changeTurn(mockPlayerSet[0].id, mockPlayerSet)
+    it("... moves piece", () => {
+      const testObj = createGameState(mockConfig);
 
-        expect(testPlayerID).toEqual(mockPlayerSet[1].id)
-      })
-    })
+      testObj.rollDice()
+      testObj.putPieceOnBoard()
+      testObj.rollDice()
+      testObj.movePiece({ x: 0, y: 1 })
+
+      expect(true).toBeTruthy()
+    });
   })
 });

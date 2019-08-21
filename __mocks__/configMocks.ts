@@ -1,16 +1,40 @@
 import { rowSetType, playerType } from "../src/types";
+import { tileKind, pieceKind } from "../src/settings";
 
 export const mockRowSet: rowSetType = [
   [
     {
-      id: 1
+      occupiedBy: null,
+      kind: tileKind.single
+    },
+    {
+      occupiedBy: null,
+      kind: tileKind.single
+    },
+    {
+      occupiedBy: null,
+      kind: tileKind.single
+    }
+  ],
+  [
+    {
+      occupiedBy: null,
+      kind: tileKind.single
+    },
+    {
+      occupiedBy: null,
+      kind: tileKind.single
+    },
+    {
+      occupiedBy: null,
+      kind: tileKind.single
     }
   ]
 ];
 
 export const mockPlayerSet: playerType[] = [
-  { id: 1, pieceType: "black", playerPath: [1, 2, 3], pieceCount: 4 },
-  { id: 2, pieceType: "white", playerPath: [4, 2, 5], pieceCount: 4 }
+  { pieceKind: pieceKind.black, playerPath: [{ x: 1, y: 0 }, { x: 1, y: 1 }, { x: 1, y: 2 }], piecesInBox: 4, piecesInEndgame: 0 },
+  { pieceKind: pieceKind.white, playerPath: [{ x: 2, y: 0 }, { x: 2, y: 1 }, { x: 2, y: 2 }], piecesInBox: 4, piecesInEndgame: 0 }
 ];
 
 export const mockDiceSet: number[][] = [[1, 1, 0, 0]];

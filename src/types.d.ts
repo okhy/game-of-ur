@@ -1,14 +1,19 @@
+export type diceType = number[]
+export type tilePositionType = { x: number, y: number }
+export type pieceType = {
+  position: number[] | 'box' | 'endgame'
+}
 export type playerType = {
-  id: number;
-  pieceType: string;
-  playerPath: number[];
-  pieceCount: number;
+  pieceKind: pieceKind;
+  playerPath: tilePositionType[];
+  piecesInBox: number,
+  piecesInEndgame: number
 };
 
+
 export type tileType = {
-  id: number;
-  isRosette?: boolean;
-  isOccupied?: boolean;
+  kind: tileKind;
+  occupiedBy: pieceKind | null;
 };
 
 export type rowSetType = tileType[][];

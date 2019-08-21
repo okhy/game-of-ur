@@ -14,5 +14,5 @@ module.exports = {
     "\\.css$": "<rootDir>/__mocks__/styleMock.js"
   },
   coveragePathIgnorePatterns: ["node_modules", "./src/types.d.ts"],
-  moduleFileExtensions: ["js", "jsx", "json", "ts", "tsx", "node"]
+  moduleFileExtensions: ["js", "jsx", "json", "ts", "tsx", "node", 'd.ts']
 };

@@ -10,7 +10,7 @@ const Board: React.SFC<boardProps> = props => {
     !!props.tileSet &&
     props.tileSet.map((row: tileType[]) => {
       const tiles = row.map(tile => {
-        return <div className="tile">{tile.id}</div>;
+        return <div className="tile">{tile.kind}</div>;
       });
 
       return <div className="row">{tiles}</div>;
