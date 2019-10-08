@@ -56,9 +56,7 @@ describe("Game state Tests", () => {
     it("... puts piece on board", () => {
       const testObj = createGameState(mockConfig);
 
-      console.log(testObj.diceRolled);
       testObj.rollDice();
-      console.log(testObj.diceRolled);
       testObj.putPieceOnBoard();
 
       const currentPlayer = testObj.players[testObj.currentPlayerIndex];

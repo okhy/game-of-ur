@@ -20,6 +20,6 @@ describe("Board component ...", () => {
     const wrapper = shallow(<Board tileSet={mockRowSet} />);
 
     expect(wrapper.find(".row")).toHaveLength(2);
-    expect(wrapper.find(".tile")).toHaveLength(1);
+    expect(wrapper.find(".tile")).toHaveLength(6);
   });
 });

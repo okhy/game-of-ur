@@ -61,15 +61,16 @@ export const createGameState = (
       this.wasDiceRolled();
 
       const currentPlayer = this.players[this.currentPlayerIndex];
+
       if (!currentPlayer.piecesInBox)
         throw new Error("Current Player has no pieces in box");
 
-      const currentPlayerPath = currentPlayer.playerPath;
+      const path = currentPlayer.playerPath;
+      const moveIndex: number = this.diceResult - 1 || 0;
 
       this.players[this.currentPlayerIndex].piecesInBox--;
-      this.board[currentPlayerPath[this.diceResult - 1].y][
-        currentPlayerPath[this.diceResult - 1].x
-      ].occupiedBy = currentPlayer.pieceKind;
+      this.board[path[moveIndex].y][path[moveIndex].x].occupiedBy =
+        currentPlayer.pieceKind;
     },
     takePieceOffBoard: function(targetTile) {
       this.players[this.currentPlayerIndex].piecesInEndgame++;
