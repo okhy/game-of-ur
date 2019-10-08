@@ -7,6 +7,7 @@ type initialGameStateType = {
   players: playerType[];
   dices: diceType[];
 };
+
 const initialGameState: initialGameStateType = {
   board: rowSet,
   players: playerSet,
@@ -23,6 +24,7 @@ export interface gameStateType extends initialGameStateType {
   takePieceOffBoard(targetTile: tilePositionType): void;
   putPieceOnBoard(): void;
   movePiece(startingTileCords: tilePositionType): void;
+  canPlayerMove(): boolean;
   resetGame(): void;
 }
 
@@ -47,13 +49,13 @@ export const createGameState = (
         this.diceResult = this.dices.reduce((acc, dice) => {
           return acc + dice[Math.floor(Math.random() * dice.length)];
         }, 0);
-
-        //if 0 the turn is lost
-        if (!this.diceResult) this.changeTurn();
       }
     },
     wasDiceRolled: function() {
       if (!this.diceRolled) throw new Error("You have to roll the dice");
+    },
+    canPlayerMove: function() {
+      return this.diceRolled && !!this.diceResult;
     },
     putPieceOnBoard: function() {
       this.wasDiceRolled();
